@@ -1,53 +1,59 @@
 
-# ==============================================================================
-# UNAD - Fundamentos de Programación
-# Fase 5 – Evaluación Final POA
-# Estudiante: Doris Adriana Mosquera | Código de Curso: 213022_566
-# ==============================================================================
+# ==================================================
+# FASE 5 - EVALUACIÓN FINAL POA
+# FUNDAMENTOS DE PROGRAMACIÓN
+# AUTOR: DORIS ADRIANA MOSQUERA
+# ==================================================
 
+# --------------------------
+# 1. DEFINICIÓN DE DATOS
+# Matriz bidimensional: [ID Cliente, Duración (segundos), Clics]
+# --------------------------
+matriz_sesiones = [
+    [101, 200, 12],
+    [102, 45, 2],
+    [103, 120, 5],
+    [104, 210, 4],
+    [105, 50, 15]
+]
+
+# --------------------------
+# 2. MÓDULO / FUNCIÓN
+# Propósito: Clasificar el nivel de compromiso
+# --------------------------
 def clasificar_compromiso(duracion, clics):
-    """
-    Función modular que aplica la lógica de negocio (RN-01, RN-02, RN-03).
-    """
+    # Regla: ALTO -> Duración > 180 Y Clics > 8
     if duracion > 180 and clics > 8:
         return "Alto"
+    # Regla: BAJO -> Duración < 60 O Clics < 3
     elif duracion < 60 or clics < 3:
         return "Bajo"
+    # Regla: MEDIO -> Cualquier otro caso
     else:
         return "Medio"
 
-def generar_informe_sesiones():
-    """
-    Carga la matriz (RF-01) e itera los datos para la salida en consola (RI-01).
-    """
-    # Matriz bidimensional con los 5 registros de la prueba de escritorio
-    matriz_clientes = [
-        [101, 200, 12],
-        [102, 45, 2],
-        [103, 120, 5],
-        [104, 210, 4],
-        [105, 50, 15]
-    ]
-    
-    # Diseño de la interfaz de salida en consola (RI-01)
-    print("=" * 60)
-    print("        INFORME DE NIVEL DE COMPROMISO DE CLIENTES")
-    print("=" * 60)
-    print(f"{'ID Cliente':<12} | {'Duración (s)':<13} | {'Clics':<8} | {'Clasificación':<10}")
-    print("-" * 60)
-    
-    # Ciclo repetitivo for para recorrer las filas de la matriz
-    for sesion in matriz_clientes:
-        id_cliente = sesion[0]
-        duracion = sesion[1]
-        clics = sesion[2]
-        
-        # Llamado al módulo de cálculo (RF-02)
-        resultado = clasificar_compromiso(duracion, clics)
-        
-        print(f"{id_cliente:<12} | {duracion:<13} | {clics:<8} | {resultado:<10}")
-        
-    print("=" * 60)
+# --------------------------
+# 3. PROCESAMIENTO Y SALIDA
+# Recorrido de matriz con estructura repetitiva
+# --------------------------
+print("========================================")
+print("REPORTE DE COMPROMISO - CLIENTES WEB")
+print("========================================")
+print(f"{'ID Cliente':<12} | {'Nivel de Compromiso':<20}")
+print("----------------------------------------")
 
-if __name__ == "__main__":
-    generar_informe_sesiones()
+# Bucle para iterar sobre cada registro de la matriz
+for registro in matriz_sesiones:
+    # Extracción de datos de la matriz
+    id_cliente = registro[0]
+    tiempo_sesion = registro[1]
+    numero_clics = registro[2]
+    
+    # Llamado a la función para obtener la clasificación
+    resultado = clasificar_compromiso(tiempo_sesion, numero_clics)
+    
+    # Impresión formateada de resultados
+    print(f"{id_cliente:<12} | {resultado:<20}")
+
+print("========================================")
+print("Procesamiento finalizado exitosamente.")
